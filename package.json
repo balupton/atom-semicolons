@@ -2,7 +2,7 @@
   "title": "Semicolons package for Atom",
   "name": "atom-semicolons",
   "main": "./lib/semicolons",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Atom package for removing semicolons in JavaScript files",
   "repository": "https://github.com/balupton/atom-semicolons",
   "license": {
