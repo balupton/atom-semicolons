@@ -1,0 +1,16 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Remove Semicolons': 'semicolons:remove'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'Semicolons'
+      'submenu': [
+        { 'label': 'Remove', 'command': 'semicolons:remove' }
+      ]
+    ]
+  }
+]
