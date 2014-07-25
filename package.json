@@ -22,7 +22,9 @@
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {},
+  "devDependencies": {
+    "temp": "^0.8.0"
+  },
   "author": "2014+ Benjamin Arthur Lupton <b@lupton.cc> (http://balupton.com)",
   "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"

@@ -25,29 +25,28 @@ Atom package for removing semicolons in JavaScript files
 <!-- /DESCRIPTION -->
 
 
+## Install
+
+``` bash
+apm install atom-semicolons
+```
+
+
 ## Tips
 
-Add the following to your keymap file to remove semicolons on save:
+Add the following to your keymap file to remove unnecessary semicolons on save:
 
 ``` coffeescript
 '.editor':
 	'cmd-s': 'semicolons:remove'
 ```
 
+
 ## Todo
 
 - [ ] Add save keymap to the package, with an option to turn it on
 - [ ] Then only remove semicolons on save `asi` is turned on in jshint configuration
 
-
-
-<!-- CONTRIBUTE/ -->
-
-## Contribute
-
-[Discover how you can contribute by heading on over to the `CONTRIBUTING.md` file.](https://github.com/undefined/semicolons/blob/master/CONTRIBUTING.md#files)
-
-<!-- /CONTRIBUTE -->
 
 
 <!-- BACKERS/ -->
@@ -73,7 +72,7 @@ No sponsors yet! Will you be the first?
 ### Contributors
 
 No contributors yet! Will you be the first?
-[Discover how you can contribute by heading on over to the `CONTRIBUTING.md` file.](https://github.com/undefined/semicolons/blob/master/CONTRIBUTING.md#files)
+[Discover how you can contribute by heading on over to the `CONTRIBUTING.md` file.](https://github.com/undefined/atom-semicolons/blob/master/CONTRIBUTING.md#files)
 
 <!-- /BACKERS -->
 

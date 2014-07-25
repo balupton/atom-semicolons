@@ -1,4 +1,8 @@
 {WorkspaceView} = require 'atom'
+temp = require('temp')
+fs = require('fs')
+path = require('path')
+
 
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 #
@@ -6,27 +10,71 @@
 # or `fdescribe`). Remove the `f` to unfocus the block.
 
 describe "Semicolons", ->
-  activationPromise = null
+  editor = null
+  buffer = null
 
   beforeEach ->
-    atom.workspaceView = new WorkspaceView
-    activationPromise = atom.packages.activatePackage('semicolons')
+    # for some reason we have to use a real file, instead of an empty file that we then set a grammer on
+    directory = temp.mkdirSync()
+    atom.project.setPath(directory)
+    filePath = path.join(directory, 'atom-semicolons.js')
+    fs.writeFileSync(filePath, '')
+
+    atom.workspaceView = new WorkspaceView()
+    atom.workspace = atom.workspaceView.model
+
+    waitsForPromise ->
+        atom.workspace.open(filePath).then (e) ->
+          editor = e
+
+    runs ->
+      buffer = editor.getBuffer()
+
+    waitsForPromise ->
+      atom.packages.activatePackage('semicolons')
 
   describe "when the semicolons:remove event is triggered", ->
     it "removes semicolons", ->
       source = """
-        I have semicolons;
-        yay;
+        "use strict"
+
+        import Ember from 'ember'
+        import Ember from 'ember';
+
+        a();
+        (1).toString();
+
+        a();
+        [1].toString();
+
+        doSomething();
+        doSomethingElse();
+
+        export default App
+        export default App;
         """
       expectation = """
-        I have semicolons
-        yay
+        "use strict";
+
+        import Ember from 'ember';
+        import Ember from 'ember';
+
+        a()
+        ;(1).toString()
+
+        a()
+        ;[1].toString()
+
+        doSomething()
+        doSomethingElse()
+
+        export default App;
+        export default App;
         """
 
-      waitsForPromise ->
-        atom.workspace.open().then (editor) ->
-          editor.setText(source)
-          atom.workspaceView.trigger('semicolons:remove')
-          setTimeout((->
-            expect(editor.getText()).toEqual(expectation)
-          ), 1000)
+      # editor.setGrammar(atom.syntax.grammarForScopeName("source.js"))
+      buffer.setText(source)
+      atom.workspaceView.trigger('semicolons:remove')
+      # editor.save()
+      result = buffer.getText()
+      expect(result).toEqual(expectation)
