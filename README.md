@@ -20,7 +20,7 @@
 
 <!-- DESCRIPTION/ -->
 
-Atom package for removing semicolons in JavaScript files
+Atom package that allows you to remove unnecessary semicolons (while keeping necessary semicolons) in JavaScript files
 
 <!-- /DESCRIPTION -->
 
